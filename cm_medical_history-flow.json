@@ -104,12 +104,30 @@
         "category": "testing"
     },
     {
-        "id": "79af592.cd02ea8",
+        "id": "d84e47d6.ee7748",
+        "type": "JSON",
+        "z": "main.flow",
+        "name": "JSON",
+        "property": "msg.payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 222.5,
+        "y": 160,
+        "wires": [
+            [
+                "5eb3cd61.894f04"
+            ]
+        ],
+        "caname": "JSON",
+        "category": "transformation"
+    },
+    {
+        "id": "c413e4f4.6c8588",
         "type": "EventListener",
         "z": "main.flow",
-        "name": "No Triggers",
+        "name": "Recieve Event",
         "provider": "aws",
-        "eventSource": "",
+        "eventSource": "lambda",
         "dynamodbOperation": "",
         "apiMethod": "any",
         "apiUrl": "",
@@ -119,6 +137,7 @@
         "event": "s3:ObjectCreated:*",
         "cognitoTrigger": "any",
         "reference": "",
+        "queueName": "",
         "keventSource": "",
         "kapiMethod": "any",
         "kapiUrl": "",
@@ -138,23 +157,5 @@
         ],
         "caname": "event-handler",
         "category": "general"
-    },
-    {
-        "id": "d84e47d6.ee7748",
-        "type": "JSON",
-        "z": "main.flow",
-        "name": "JSON",
-        "property": "msg.payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 222.5,
-        "y": 160,
-        "wires": [
-            [
-                "5eb3cd61.894f04"
-            ]
-        ],
-        "caname": "JSON",
-        "category": "transformation"
     }
 ]

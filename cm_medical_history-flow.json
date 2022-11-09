@@ -221,7 +221,7 @@
         "Rolearn": "",
         "Region": "ap-southeast-2",
         "SecurityType": "Credentials",
-        "ReqTimeout": "",
+        "ReqTimeout": "10000",
         "name": "S3",
         "x": 682.5,
         "y": 160,
@@ -251,5 +251,60 @@
         ],
         "caname": "logger",
         "category": "logging"
+    },
+    {
+        "id": "47484a66.25ffd4",
+        "type": "catch",
+        "z": "main.flow",
+        "name": "catch",
+        "scope": null,
+        "uncaught": false,
+        "x": 440,
+        "y": 320,
+        "wires": [
+            [
+                "a18c3c7a.810fc"
+            ]
+        ],
+        "caname": "catch",
+        "category": "exception"
+    },
+    {
+        "id": "a18c3c7a.810fc",
+        "type": "Logger",
+        "z": "main.flow",
+        "name": "Logger",
+        "level": "INFO",
+        "message": "msg.error",
+        "format": "json",
+        "headers": {},
+        "x": 600,
+        "y": 320,
+        "wires": [
+            [
+                "26a97d81.b44822"
+            ]
+        ],
+        "caname": "logger",
+        "category": "logging"
+    },
+    {
+        "id": "26a97d81.b44822",
+        "type": "EventListener-End",
+        "z": "main.flow",
+        "name": "EventListener-End",
+        "statusCode": "500",
+        "responseType": "http",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "payload": "msg.error",
+        "eventPayload": "",
+        "eventType": "success",
+        "x": 742.5,
+        "y": 320,
+        "wires": [],
+        "caname": "eventlistenerend",
+        "category": "general"
     }
 ]

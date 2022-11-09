@@ -19,7 +19,7 @@
         "z": "main.flow",
         "name": "Log",
         "level": "INFO",
-        "message": "Request received & msg",
+        "message": "Request received & msg.payload",
         "format": "string",
         "headers": {},
         "x": 310,

@@ -14,6 +14,7 @@ env:
   FLOW_MEMORY: 1024
   FLOW_ENV: '{"Variables":{"servicename": "cm_medical_history","datadoghost" : "http-intake.logs.datadoghq.com","datadogkey" : "${{ secrets.NP_DATADOG_KEY }}" }}'
   FLOW_TAGS: '{"OWNER": "CM"}'    
+  FLOW_TRIGGERS: ''
 
 jobs:
   deploy-development:
@@ -56,7 +57,7 @@ jobs:
     # generate CF script
     - name: generate cf script
       run: |
-        kl export cloudformation --project-directory . --environment '${{ env.FLOW_ENV }}' --tags '${{ env.FLOW_TAGS }}' --timeout ${{ env.FLOW_TIMEOUT }}  --memory-size ${{ env.FLOW_MEMORY }} --zip-file-name lambda.zip --lambda-name ${{ env.ENVIRONMENT }}-cm-master-router-flow --bucket-name ${{ secrets.NP_S3_DEPLOY_BUCKET }}'
+        kl export cloudformation --project-directory . --environment '${{ env.FLOW_ENV }}' --tags '${{ env.FLOW_TAGS }}' --timeout ${{ env.FLOW_TIMEOUT }}  --memory-size ${{ env.FLOW_MEMORY }} --zip-file-name lambda.zip --lambda-name ${{ env.ENVIRONMENT }}-cm-master-router-flow --bucket-name ${{ secrets.NP_S3_DEPLOY_BUCKET }} --triggers '${{ env.FLOW_TRIGGERS }}'
  
     - name: display script
       run: 

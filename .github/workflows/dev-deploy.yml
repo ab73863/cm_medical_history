@@ -57,7 +57,7 @@ jobs:
     # generate CF script
     - name: generate cf script
       run: |
-        kl export cloudformation --project-directory . --environment '${{ env.FLOW_ENV }}' --tags '${{ env.FLOW_TAGS }}' --timeout ${{ env.FLOW_TIMEOUT }}  --memory-size ${{ env.FLOW_MEMORY }} --zip-file-name lambda.zip --lambda-name ${{ env.ENVIRONMENT }}-cm-master-router-flow --bucket-name ${{ secrets.NP_S3_DEPLOY_BUCKET }}
+        kl export cloudformation --project-directory . --environment '${{ env.FLOW_ENV }}' --tags '${{ env.FLOW_TAGS }}' --timeout ${{ env.FLOW_TIMEOUT }}  --memory-size ${{ env.FLOW_MEMORY }} --zip-file-name lambda.zip --lambda-name ${{ env.ENVIRONMENT }}-cm-medical-history-flow --bucket-name ${{ secrets.NP_S3_DEPLOY_BUCKET }}
  
     - name: display script
       run: 
@@ -66,13 +66,13 @@ jobs:
     # cf prepare
     - name: cf package
       run: 
-        aws cloudformation package --template-file ./build/template.json --s3-bucket ${{ secrets.NP_S3_DEPLOY_BUCKET }} --s3-prefix ${{ env.ENVIRONMENT }}-cm-master-router-flow --output-template-file cm-master-router-flow.yml
+        aws cloudformation package --template-file ./build/template.json --s3-bucket ${{ secrets.NP_S3_DEPLOY_BUCKET }} --s3-prefix ${{ env.ENVIRONMENT }}-cm-medical-history-flow --output-template-file cm-medical-history-flow.yml
  
     # cf deploy
     - name: Deploy CloudFormation Stack
       uses: aws-actions/aws-cloudformation-github-deploy@v1.0.3         
       with:
-        name: ${{ env.ENVIRONMENT }}-cm-master-router-flow
-        template: cm-master-router-flow.yml
+        name: ${{ env.ENVIRONMENT }}-cm-medical-history-flow
+        template: cm-medical-history-flow.yml
         capabilities: CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND
         no-fail-on-empty-changeset: "1"

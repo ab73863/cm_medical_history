@@ -204,7 +204,7 @@
         "Rolearn": "",
         "Region": "ap-southeast-2",
         "SecurityType": "Credentials",
-        "ReqTimeout": "10000",
+        "ReqTimeout": "25000",
         "name": "S3",
         "x": 642.5,
         "y": 160,

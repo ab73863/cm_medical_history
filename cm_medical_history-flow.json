@@ -174,7 +174,7 @@
         "y": 160,
         "wires": [
             [
-                "523a5d7f.e70754"
+                "a5a8e404.7cae48"
             ]
         ],
         "caname": "template",
@@ -291,12 +291,12 @@
         "category": "general"
     },
     {
-        "id": "523a5d7f.e70754",
+        "id": "a5a8e404.7cae48",
         "type": "Function",
         "z": "main.flow",
         "name": "Function",
         "noerr": 0,
-        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \n\nconst pdf = require(\"html-pdf-lambda\");\npdf\n  .create(msg.payload, 'test')\n  .then((res) => {\n    return msg;\n  })\n  .catch((error) => {\n  });",
+        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \nnode.info('test---')\nconst pdf = require(\"html-pdf-lambda\");\n\n",
         "x": 542.5,
         "y": 160,
         "wires": [

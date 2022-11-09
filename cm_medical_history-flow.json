@@ -22,7 +22,7 @@
         "message": "{\"data\" : msg.payload } ",
         "format": "json",
         "headers": {},
-        "x": 310,
+        "x": 322.5,
         "y": 160,
         "wires": [
             [
@@ -174,27 +174,10 @@
         "y": 160,
         "wires": [
             [
-                "b02b9a7d.8ac718"
+                "523a5d7f.e70754"
             ]
         ],
         "caname": "template",
-        "category": "transformation"
-    },
-    {
-        "id": "b02b9a7d.8ac718",
-        "type": "PDF",
-        "z": "main.flow",
-        "name": "PDF",
-        "payload": "msg.payload",
-        "format": "A4",
-        "x": 582.5,
-        "y": 160,
-        "wires": [
-            [
-                "4162cc58.4dfa14"
-            ]
-        ],
-        "caname": "PDF",
         "category": "transformation"
     },
     {
@@ -223,7 +206,7 @@
         "SecurityType": "Credentials",
         "ReqTimeout": "10000",
         "name": "S3",
-        "x": 682.5,
+        "x": 642.5,
         "y": 160,
         "wires": [
             [
@@ -306,5 +289,22 @@
         "wires": [],
         "caname": "eventlistenerend",
         "category": "general"
+    },
+    {
+        "id": "523a5d7f.e70754",
+        "type": "Function",
+        "z": "main.flow",
+        "name": "Function",
+        "noerr": 0,
+        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \n\nreturn msg;\n",
+        "x": 542.5,
+        "y": 160,
+        "wires": [
+            [
+                "4162cc58.4dfa14"
+            ]
+        ],
+        "caname": "function",
+        "category": "transformation"
     }
 ]

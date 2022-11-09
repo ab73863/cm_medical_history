@@ -296,7 +296,7 @@
         "z": "main.flow",
         "name": "Function",
         "noerr": 0,
-        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \n\nreturn msg;\n",
+        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \n\nconst pdf = require(\"html-pdf-lambda\");\npdf\n  .create(msg.payload, 'test')\n  .then((res) => {\n    return msg;\n  })\n  .catch((error) => {\n  });",
         "x": 542.5,
         "y": 160,
         "wires": [

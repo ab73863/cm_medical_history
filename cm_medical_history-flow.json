@@ -84,7 +84,7 @@
         "z": "test.flow",
         "name": "HTTPTestCase",
         "method": "GET",
-        "path": "/hello",
+        "path": "/test",
         "headers": {
             "Accept": "application/json"
         },
@@ -93,6 +93,7 @@
         "secPassword": "",
         "secToken": "",
         "payload": "",
+        "mocks": [],
         "x": 122.5,
         "y": 160,
         "wires": [
@@ -215,11 +216,11 @@
         "DestinationKeyType": "",
         "Delete": "",
         "DeleteType": "",
-        "AccessKey": "",
-        "AccessSecret": "",
+        "AccessKey": "env.bucketkey",
+        "AccessSecret": "env.bucketsecret",
         "Rolearn": "",
-        "Region": "",
-        "SecurityType": "Implicit",
+        "Region": "ap-southeast-2",
+        "SecurityType": "Credentials",
         "ReqTimeout": "",
         "name": "S3",
         "x": 682.5,

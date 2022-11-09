@@ -206,7 +206,7 @@
         "SecurityType": "Credentials",
         "ReqTimeout": "25000",
         "name": "S3",
-        "x": 642.5,
+        "x": 682.5,
         "y": 160,
         "wires": [
             [
@@ -294,17 +294,73 @@
         "id": "a5a8e404.7cae48",
         "type": "Function",
         "z": "main.flow",
-        "name": "Function",
+        "name": "Function;",
         "noerr": 0,
-        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \nnode.info('test---')\nconst data = {\n    title: \"Hello World!\",\n    users: [\n      {\n          name: \"Shyam\",\n          age: \"26\",\n      },\n      {\n          name: \"Navjot\",\n          age: \"26\",\n      },\n      {\n          name: \"Vitthal\",\n          age: \"26\",\n      },\n    ]\n  };\n// The file buffer will be developed;\nconst pdf = require(\"html-pdf-lambda\");\npdf\n  .create(\"<html><body>test</body></html>\", data)\n  .then((res) => {\n    console.log(res);\n    msg.payload = res;\n    return msg\n  })",
+        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \nnode.info('test---')\nconst data = {\n    title: \"Hello World!\",\n    users: [\n      {\n          name: \"Shyam\",\n          age: \"26\",\n      },\n      {\n          name: \"Navjot\",\n          age: \"26\",\n      },\n      {\n          name: \"Vitthal\",\n          age: \"26\",\n      },\n    ]\n  };\n// The file buffer will be developed;\nconst pdf = require(\"html-pdf-lambda\");\npdf\n  .create(\"<html><body>test</body></html>\", data)\n  .then((res) => {\n    console.log(res);\n    msg.payload = res;\n    return msg;\n  })",
         "x": 542.5,
+        "y": 160,
+        "wires": [
+            [
+                "177ed425.5d313c"
+            ]
+        ],
+        "caname": "function",
+        "category": "transformation"
+    },
+    {
+        "id": "5d902477.01423c",
+        "type": "EventListener",
+        "z": "main.flow",
+        "name": "EventListener",
+        "provider": "aws",
+        "eventSource": "api",
+        "dynamodbOperation": "",
+        "apiMethod": "get",
+        "apiUrl": "/test",
+        "albMethod": "any",
+        "albUrl": "",
+        "bucketName": "",
+        "event": "s3:ObjectCreated:*",
+        "cognitoTrigger": "any",
+        "reference": "",
+        "queueName": "",
+        "keventSource": "",
+        "kapiMethod": "any",
+        "kapiUrl": "",
+        "kcronexpression": "",
+        "kreference": "",
+        "kObjectStoreOperation": "all",
+        "kObjectStoreName": "",
+        "zeventSource": "",
+        "zapiMethod": "any",
+        "zapiUrl": "",
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "5eb3cd61.894f04"
+            ]
+        ],
+        "caname": "event-handler",
+        "category": "general"
+    },
+    {
+        "id": "177ed425.5d313c",
+        "type": "Logger",
+        "z": "main.flow",
+        "name": "Logger",
+        "level": "INFO",
+        "message": "msg.payload",
+        "format": "json",
+        "headers": {},
+        "x": 602.5,
         "y": 160,
         "wires": [
             [
                 "4162cc58.4dfa14"
             ]
         ],
-        "caname": "function",
-        "category": "transformation"
+        "caname": "logger",
+        "category": "logging"
     }
 ]

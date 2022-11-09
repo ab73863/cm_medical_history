@@ -10,7 +10,7 @@ on:
 env:
   AWS_REGION: ap-southeast-2
   ENVIRONMENT: dev
-  FLOW_TIMEOUT: 5
+  FLOW_TIMEOUT: 30
   FLOW_MEMORY: 1024
   FLOW_ENV: '{"Variables":{"servicename": "cm_medical_history","datadoghost" : "http-intake.logs.datadoghq.com","datadogkey" : "${{ secrets.NP_DATADOG_KEY }}","bucketkey": "${{secrets.NP_AWS_ACCESS_KEY_ID}}","bucketsecret": "${{secrets.NP_AWS_SECRET_ACCESS_KEY}}" }}'
   FLOW_TAGS: '{"OWNER": "CM"}'    

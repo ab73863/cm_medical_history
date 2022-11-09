@@ -13,6 +13,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@kumologica/kumologica-contrib-datadog": "^0.0.15",
         "@kumologica/runtime": "3.0.27-beta6",
         "html-pdf-lambda": "^1.0.0"
     },

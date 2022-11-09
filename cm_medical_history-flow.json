@@ -14,35 +14,19 @@
         "info": ""
     },
     {
-        "id": "5eb3cd61.894f04",
-        "type": "Logger",
-        "z": "main.flow",
-        "name": "Log",
-        "level": "INFO",
-        "message": "{\"data\" : msg.payload } ",
-        "format": "json",
-        "headers": {},
-        "x": 322.5,
-        "y": 160,
-        "wires": [
-            [
-                "f04e0240.077b7"
-            ]
-        ],
-        "caname": "logger",
-        "category": "logging"
-    },
-    {
         "id": "b5fc6ccd.17dd7",
         "type": "EventListener-End",
         "z": "main.flow",
         "name": "Success",
         "statusCode": "200",
+        "responseType": "http",
         "headers": {
             "Content-Type": "application/json"
         },
-        "payload": "{\"hello\": \"world\"}",
-        "x": 842.5,
+        "payload": "{\"status\": \"completed\"}",
+        "eventPayload": "",
+        "eventType": "success",
+        "x": 882.5,
         "y": 160,
         "wires": [],
         "caname": "eventlistenerend",
@@ -116,7 +100,7 @@
         "y": 160,
         "wires": [
             [
-                "5eb3cd61.894f04"
+                "6a8c7696.7106d8"
             ]
         ],
         "caname": "JSON",
@@ -168,9 +152,9 @@
         "fieldType": "camsg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<html>\n<body>\n   Test data\n</body>\n</html>",
+        "template": "<html>\n<body>\n   <table>\n     <tr>\n       <td></td>\n       <td></td>\n       <td></td>\n     </tr>\n   </table>\n</body>\n</html>",
         "output": "str",
-        "x": 442.5,
+        "x": 422.5,
         "y": 160,
         "wires": [
             [
@@ -205,86 +189,50 @@
         "Region": "ap-southeast-2",
         "SecurityType": "Credentials",
         "ReqTimeout": "25000",
-        "name": "S3",
-        "x": 682.5,
+        "name": "Upload to Storage",
+        "x": 662.5,
         "y": 160,
         "wires": [
             [
-                "4da00d51.cba274"
+                "77e46074.f5d23"
             ]
         ],
         "caname": "S3",
         "category": "aws"
     },
     {
-        "id": "4da00d51.cba274",
-        "type": "Logger",
-        "z": "main.flow",
-        "name": "Logger",
-        "level": "INFO",
-        "message": "msg.payload",
-        "format": "json",
-        "headers": {},
-        "x": 762.5,
-        "y": 160,
-        "wires": [
-            [
-                "b5fc6ccd.17dd7"
-            ]
-        ],
-        "caname": "logger",
-        "category": "logging"
-    },
-    {
         "id": "47484a66.25ffd4",
         "type": "catch",
         "z": "main.flow",
-        "name": "catch",
-        "scope": null,
+        "name": "catch PDF generation failed",
+        "scope": [
+            "a5a8e404.7cae48"
+        ],
         "uncaught": false,
-        "x": 440,
+        "x": 302.5,
         "y": 320,
         "wires": [
             [
-                "a18c3c7a.810fc"
+                "d3df22a.307c8e"
             ]
         ],
         "caname": "catch",
         "category": "exception"
     },
     {
-        "id": "a18c3c7a.810fc",
-        "type": "Logger",
-        "z": "main.flow",
-        "name": "Logger",
-        "level": "INFO",
-        "message": "msg.error",
-        "format": "json",
-        "headers": {},
-        "x": 600,
-        "y": 320,
-        "wires": [
-            [
-                "26a97d81.b44822"
-            ]
-        ],
-        "caname": "logger",
-        "category": "logging"
-    },
-    {
         "id": "26a97d81.b44822",
         "type": "EventListener-End",
         "z": "main.flow",
-        "name": "EventListener-End",
+        "name": "Failed",
         "statusCode": "500",
         "responseType": "http",
         "headers": {
             "Content-Type": "application/json"
         },
-        "payload": "msg.error",
+        "payload": "{\"status\": \"failed\"}",
         "eventPayload": "",
         "eventType": "success",
-        "x": 742.5,
+        "x": 602.5,
         "y": 320,
         "wires": [],
         "caname": "eventlistenerend",
@@ -294,73 +242,175 @@
         "id": "a5a8e404.7cae48",
         "type": "Function",
         "z": "main.flow",
-        "name": "Function;",
+        "name": "PDF Generation",
         "noerr": 0,
-        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \nnode.info('test---')\nconst data = {\n    title: \"Hello World!\",\n    users: [\n      {\n          name: \"Shyam\",\n          age: \"26\",\n      },\n      {\n          name: \"Navjot\",\n          age: \"26\",\n      },\n      {\n          name: \"Vitthal\",\n          age: \"26\",\n      },\n    ]\n  };\n// The file buffer will be developed;\nconst pdf = require(\"html-pdf-lambda\");\npdf\n  .create(\"<html><body>test</body></html>\", data)\n  .then((res) => {\n    console.log(res);\n    msg.payload = res;\n    node.send(msg)\n  })",
-        "x": 542.5,
+        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \nnode.info('Inside PDF generation function')\nconst data = {\n  };\n\nconst pdf = require(\"html-pdf-lambda\");\npdf\n  .create(msg.payload, data)\n  .then((res) => {\n    console.log(res);\n    msg.payload = res;\n    node.send(msg)\n  })",
+        "x": 502.5,
         "y": 160,
         "wires": [
             [
-                "177ed425.5d313c"
+                "ab780919.5009b8"
             ]
         ],
         "caname": "function",
         "category": "transformation"
     },
     {
-        "id": "5d902477.01423c",
-        "type": "EventListener",
+        "id": "6a8c7696.7106d8",
+        "type": "Datadog",
         "z": "main.flow",
-        "name": "EventListener",
-        "provider": "aws",
-        "eventSource": "api",
-        "dynamodbOperation": "",
-        "apiMethod": "get",
-        "apiUrl": "/test",
-        "albMethod": "any",
-        "albUrl": "",
-        "bucketName": "",
-        "event": "s3:ObjectCreated:*",
-        "cognitoTrigger": "any",
-        "reference": "",
-        "queueName": "",
-        "keventSource": "",
-        "kapiMethod": "any",
-        "kapiUrl": "",
-        "kcronexpression": "",
-        "kreference": "",
-        "kObjectStoreOperation": "all",
-        "kObjectStoreName": "",
-        "zeventSource": "",
-        "zapiMethod": "any",
-        "zapiUrl": "",
-        "x": 180,
-        "y": 100,
+        "name": "Log_In",
+        "loglevel": "Info",
+        "host": "env.datadoghost",
+        "hostType": "",
+        "service": "env.servicename",
+        "serviceType": "",
+        "key": "env.datadogkey",
+        "keyType": "",
+        "property": "$string( {\"type\":\"service-in\", \"message\" : \"Lambda event recieved\", \"data\": msg.payload, \"txnid\" : msg._msgid } )",
+        "propertyType": "",
+        "x": 322.5,
+        "y": 160,
         "wires": [
             [
-                "5eb3cd61.894f04"
+                "f04e0240.077b7"
             ]
         ],
-        "caname": "event-handler",
-        "category": "general"
+        "caname": "datadog",
+        "category": "logging"
     },
     {
-        "id": "177ed425.5d313c",
-        "type": "Logger",
+        "id": "ab780919.5009b8",
+        "type": "Datadog",
         "z": "main.flow",
-        "name": "Logger",
-        "level": "INFO",
-        "message": "msg.payload",
-        "format": "json",
-        "headers": {},
-        "x": 602.5,
+        "name": "Log_PDFCompletion",
+        "loglevel": "Info",
+        "host": "env.datadoghost",
+        "hostType": "",
+        "service": "env.servicename",
+        "serviceType": "",
+        "key": "env.datadogkey",
+        "keyType": "",
+        "property": "$string( {\"type\":\"log\", \"message\" : \"PDF generation completed\", \"data\": \"\", \"txnid\" : msg._msgid } )",
+        "propertyType": "",
+        "x": 582.5,
         "y": 160,
         "wires": [
             [
                 "4162cc58.4dfa14"
             ]
         ],
-        "caname": "logger",
+        "caname": "datadog",
+        "category": "logging"
+    },
+    {
+        "id": "77e46074.f5d23",
+        "type": "Datadog",
+        "z": "main.flow",
+        "name": "Log_UploadCompletion",
+        "loglevel": "Info",
+        "host": "env.datadoghost",
+        "hostType": "",
+        "service": "env.servicename",
+        "serviceType": "",
+        "key": "env.datadogkey",
+        "keyType": "",
+        "property": "$string( {\"type\":\"service-out\", \"message\" : \"PDF upload completed\", \"data\": \"\", \"txnid\" : msg._msgid } )",
+        "propertyType": "",
+        "x": 762.5,
+        "y": 160,
+        "wires": [
+            [
+                "b5fc6ccd.17dd7"
+            ]
+        ],
+        "caname": "datadog",
+        "category": "logging"
+    },
+    {
+        "id": "d3df22a.307c8e",
+        "type": "Datadog",
+        "z": "main.flow",
+        "name": "Log_Failure",
+        "loglevel": "Info",
+        "host": "env.datadoghost",
+        "hostType": "",
+        "service": "env.servicename",
+        "serviceType": "",
+        "key": "env.datadogkey",
+        "keyType": "",
+        "property": "$string( {\"type\":\"error\", \"message\" : \"PDF generation function failed\", \"data\": msg.error, \"txnid\" : msg._msgid } )",
+        "propertyType": "",
+        "x": 442.5,
+        "y": 320,
+        "wires": [
+            [
+                "26a97d81.b44822"
+            ]
+        ],
+        "caname": "datadog",
+        "category": "logging"
+    },
+    {
+        "id": "425da09a.e0cfb",
+        "type": "catch",
+        "z": "main.flow",
+        "name": "catch PDF upload failed",
+        "scope": [
+            "77e46074.f5d23"
+        ],
+        "uncaught": false,
+        "x": 302.5,
+        "y": 440,
+        "wires": [
+            [
+                "cff13ae1.529378"
+            ]
+        ],
+        "caname": "catch",
+        "category": "exception"
+    },
+    {
+        "id": "fd3d87aa.5859f8",
+        "type": "EventListener-End",
+        "z": "main.flow",
+        "name": "Failed",
+        "statusCode": "500",
+        "responseType": "http",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "payload": "{\"status\": \"failed\"}",
+        "eventPayload": "",
+        "eventType": "success",
+        "x": 602.5,
+        "y": 440,
+        "wires": [],
+        "caname": "eventlistenerend",
+        "category": "general"
+    },
+    {
+        "id": "cff13ae1.529378",
+        "type": "Datadog",
+        "z": "main.flow",
+        "name": "Log_Failure",
+        "loglevel": "Info",
+        "host": "env.datadoghost",
+        "hostType": "",
+        "service": "env.servicename",
+        "serviceType": "",
+        "key": "env.datadogkey",
+        "keyType": "",
+        "property": "$string( {\"type\":\"error\", \"message\" : \"PDF upload failed\", \"data\": msg.error, \"txnid\" : msg._msgid } )",
+        "propertyType": "",
+        "x": 442.5,
+        "y": 440,
+        "wires": [
+            [
+                "fd3d87aa.5859f8"
+            ]
+        ],
+        "caname": "datadog",
         "category": "logging"
     }
 ]

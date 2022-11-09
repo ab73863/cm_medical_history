@@ -296,7 +296,7 @@
         "z": "main.flow",
         "name": "Function",
         "noerr": 0,
-        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \nnode.info('test---')\nconst pdf = require(\"html-pdf-lambda\");\n\n",
+        "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \nnode.info('test---')\nconst data = {\n    title: \"Hello World!\",\n    users: [\n      {\n          name: \"Shyam\",\n          age: \"26\",\n      },\n      {\n          name: \"Navjot\",\n          age: \"26\",\n      },\n      {\n          name: \"Vitthal\",\n          age: \"26\",\n      },\n    ]\n  };\n// The file buffer will be developed;\nconst pdf = require(\"html-pdf-lambda\");\npdf\n  .create(\"<html><body>test</body></html>\", data)\n  .then((res) => {\n    console.log(res);\n    return msg\n  })",
         "x": 542.5,
         "y": 160,
         "wires": [

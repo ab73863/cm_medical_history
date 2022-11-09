@@ -4,20 +4,19 @@
     "description": "Kumologica flow",
     "main": "lambda.js",
     "files": [
-      "lambda.js",
-      "cm_medical_history-flow.json",
-      "node_modules/**/*"
+        "lambda.js",
+        "cm_medical_history-flow.json",
+        "node_modules/**/*"
     ],
-    "scripts": {
-    },
+    "scripts": {},
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "@kumologica/runtime": "3.0.27-beta6"
+        "@kumologica/kumologica-contrib-pdfgenerator": "^1.0.0",
+        "@kumologica/runtime": "3.0.27-beta6"
     },
     "devDependencies": {
-      "aws-sdk": "^2.513.0"
+        "aws-sdk": "^2.513.0"
     }
-  }
-  
+}

@@ -26,7 +26,7 @@
         "y": 160,
         "wires": [
             [
-                "b5fc6ccd.17dd7"
+                "f04e0240.077b7"
             ]
         ],
         "caname": "logger",
@@ -42,7 +42,7 @@
             "Content-Type": "application/json"
         },
         "payload": "{\"hello\": \"world\"}",
-        "x": 520,
+        "x": 802.5,
         "y": 160,
         "wires": [],
         "caname": "eventlistenerend",
@@ -157,5 +157,79 @@
         ],
         "caname": "event-handler",
         "category": "general"
+    },
+    {
+        "id": "f04e0240.077b7",
+        "type": "Template",
+        "z": "main.flow",
+        "name": "Template",
+        "field": "payload",
+        "fieldType": "camsg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n<body>\n   Test data\n</body>\n</html>",
+        "output": "str",
+        "x": 442.5,
+        "y": 160,
+        "wires": [
+            [
+                "b02b9a7d.8ac718"
+            ]
+        ],
+        "caname": "template",
+        "category": "transformation"
+    },
+    {
+        "id": "b02b9a7d.8ac718",
+        "type": "PDF",
+        "z": "main.flow",
+        "name": "PDF",
+        "payload": "msg.payload",
+        "format": "A4",
+        "x": 582.5,
+        "y": 160,
+        "wires": [
+            [
+                "4162cc58.4dfa14"
+            ]
+        ],
+        "caname": "PDF",
+        "category": "transformation"
+    },
+    {
+        "id": "4162cc58.4dfa14",
+        "type": "S3",
+        "z": "main.flow",
+        "operation": "CreateBucket",
+        "Bucket": "efsdemobucket",
+        "Key": "",
+        "KeyType": "",
+        "Content": "",
+        "ContentType": "",
+        "BucketType": "",
+        "CopySource": "",
+        "CopySourceType": "",
+        "DestinationBucket": "",
+        "DestinationBucketType": "",
+        "DestinationKey": "",
+        "DestinationKeyType": "",
+        "Delete": "",
+        "DeleteType": "",
+        "AccessKey": "",
+        "AccessSecret": "",
+        "Rolearn": "",
+        "Region": "",
+        "SecurityType": "",
+        "ReqTimeout": "",
+        "name": "S3",
+        "x": 682.5,
+        "y": 160,
+        "wires": [
+            [
+                "b5fc6ccd.17dd7"
+            ]
+        ],
+        "caname": "S3",
+        "category": "aws"
     }
 ]

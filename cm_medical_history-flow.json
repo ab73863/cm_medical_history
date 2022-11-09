@@ -219,7 +219,7 @@
         "AccessSecret": "",
         "Rolearn": "",
         "Region": "",
-        "SecurityType": "",
+        "SecurityType": "Implicit",
         "ReqTimeout": "",
         "name": "S3",
         "x": 682.5,

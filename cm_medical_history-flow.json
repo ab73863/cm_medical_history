@@ -42,7 +42,7 @@
             "Content-Type": "application/json"
         },
         "payload": "{\"hello\": \"world\"}",
-        "x": 802.5,
+        "x": 842.5,
         "y": 160,
         "wires": [],
         "caname": "eventlistenerend",
@@ -226,10 +226,29 @@
         "y": 160,
         "wires": [
             [
-                "b5fc6ccd.17dd7"
+                "4da00d51.cba274"
             ]
         ],
         "caname": "S3",
         "category": "aws"
+    },
+    {
+        "id": "4da00d51.cba274",
+        "type": "Logger",
+        "z": "main.flow",
+        "name": "Logger",
+        "level": "INFO",
+        "message": "msg.payload",
+        "format": "json",
+        "headers": {},
+        "x": 762.5,
+        "y": 160,
+        "wires": [
+            [
+                "b5fc6ccd.17dd7"
+            ]
+        ],
+        "caname": "logger",
+        "category": "logging"
     }
 ]

@@ -96,11 +96,11 @@
         "property": "msg.payload",
         "action": "obj",
         "pretty": false,
-        "x": 222.5,
+        "x": 162.5,
         "y": 160,
         "wires": [
             [
-                "6a8c7696.7106d8"
+                "c785ac1a.9afeb"
             ]
         ],
         "caname": "JSON",
@@ -133,7 +133,7 @@
         "zeventSource": "",
         "zapiMethod": "any",
         "zapiUrl": "",
-        "x": 122.5,
+        "x": 82.5,
         "y": 160,
         "wires": [
             [
@@ -267,7 +267,7 @@
         "serviceType": "",
         "key": "env.datadogkey",
         "keyType": "",
-        "property": "$string( {\"type\":\"service-in\", \"message\" : \"Lambda event recieved\", \"data\": msg.payload, \"txnid\" : msg._msgid } )",
+        "property": "$string( {\"type\":\"service-in\", \"message\" : \"Lambda event recieved\", \"data\": msg.payload, \"btxnid\": msg.bid, \"txnid\" : msg._msgid } )",
         "propertyType": "",
         "x": 322.5,
         "y": 160,
@@ -291,7 +291,7 @@
         "serviceType": "",
         "key": "env.datadogkey",
         "keyType": "",
-        "property": "$string( {\"type\":\"log\", \"message\" : \"PDF generation completed\", \"data\": \"\", \"txnid\" : msg._msgid } )",
+        "property": "$string( {\"type\":\"log\", \"message\" : \"PDF generation completed\", \"data\": \"\",\"btxnid\": msg.bid, \"txnid\" : msg._msgid } )",
         "propertyType": "",
         "x": 582.5,
         "y": 160,
@@ -315,7 +315,7 @@
         "serviceType": "",
         "key": "env.datadogkey",
         "keyType": "",
-        "property": "$string( {\"type\":\"service-out\", \"message\" : \"PDF upload completed\", \"data\": \"\", \"txnid\" : msg._msgid } )",
+        "property": "$string( {\"type\":\"service-out\", \"message\" : \"PDF upload completed\", \"data\": \"\",\"btxnid\": msg.bid, \"txnid\" : msg._msgid } )",
         "propertyType": "",
         "x": 762.5,
         "y": 160,
@@ -339,7 +339,7 @@
         "serviceType": "",
         "key": "env.datadogkey",
         "keyType": "",
-        "property": "$string( {\"type\":\"error\", \"message\" : \"PDF generation function failed\", \"data\": msg.error, \"txnid\" : msg._msgid } )",
+        "property": "$string( {\"type\":\"error\", \"message\" : \"PDF generation function failed\", \"data\": msg.error, \"btxnid\": msg.bid, \"txnid\" : msg._msgid } )",
         "propertyType": "",
         "x": 442.5,
         "y": 320,
@@ -401,7 +401,7 @@
         "serviceType": "",
         "key": "env.datadogkey",
         "keyType": "",
-        "property": "$string( {\"type\":\"error\", \"message\" : \"PDF upload failed\", \"data\": msg.error, \"txnid\" : msg._msgid } )",
+        "property": "$string( {\"type\":\"error\", \"message\" : \"PDF upload failed\", \"data\": msg.error, \"btxnid\": msg.bid, \"txnid\" : msg._msgid } )",
         "propertyType": "",
         "x": 442.5,
         "y": 440,
@@ -412,5 +412,34 @@
         ],
         "caname": "datadog",
         "category": "logging"
+    },
+    {
+        "id": "c785ac1a.9afeb",
+        "type": "Set-Property",
+        "z": "main.flow",
+        "name": "Set bussiness txid",
+        "rules": [
+            {
+                "t": "set",
+                "p": "bid",
+                "pt": "camsg",
+                "to": "$eval( msg.payload.Records[0] ).bid",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 242.5,
+        "y": 160,
+        "wires": [
+            [
+                "6a8c7696.7106d8"
+            ]
+        ],
+        "caname": "setproperty",
+        "category": "transformation"
     }
 ]

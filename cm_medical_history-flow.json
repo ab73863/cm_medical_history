@@ -26,7 +26,7 @@
         "payload": "{\"status\": \"completed\"}",
         "eventPayload": "",
         "eventType": "success",
-        "x": 882.5,
+        "x": 942.5,
         "y": 160,
         "wires": [],
         "caname": "eventlistenerend",
@@ -76,7 +76,7 @@
         "secUser": "",
         "secPassword": "",
         "secToken": "",
-        "payload": "",
+        "payload": "{\n  \"test\" : \"test\"\n}",
         "mocks": [],
         "x": 122.5,
         "y": 160,
@@ -321,7 +321,7 @@
         "y": 160,
         "wires": [
             [
-                "b5fc6ccd.17dd7"
+                "2ea9a7aa.799518"
             ]
         ],
         "caname": "datadog",
@@ -441,5 +441,32 @@
         ],
         "caname": "setproperty",
         "category": "transformation"
+    },
+    {
+        "id": "2ea9a7aa.799518",
+        "type": "SNS",
+        "z": "main.flow",
+        "name": "SNS",
+        "operation": "Publish",
+        "PublishTopic": "arn:aws:sns:ap-southeast-2:174842903734:testtopic",
+        "Platform": "APNS",
+        "PlatformAppARN": "",
+        "Token": "",
+        "Message": "{\"bid\": msg.bid,\"event\" : \"notificationevent\"}",
+        "AccessKey": "env.bucketkey",
+        "AccessSecret": "env.bucketsecret",
+        "Rolearn": "",
+        "Region": "ap-southeast-2",
+        "SecurityType": "Credentials",
+        "ReqTimeout": "30000",
+        "x": 842.5,
+        "y": 160,
+        "wires": [
+            [
+                "b5fc6ccd.17dd7"
+            ]
+        ],
+        "caname": "sns",
+        "category": "aws"
     }
 ]

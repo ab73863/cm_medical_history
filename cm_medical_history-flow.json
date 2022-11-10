@@ -26,7 +26,7 @@
         "payload": "{\"status\": \"completed\"}",
         "eventPayload": "",
         "eventType": "success",
-        "x": 942.5,
+        "x": 1042.5,
         "y": 160,
         "wires": [],
         "caname": "eventlistenerend",
@@ -152,9 +152,9 @@
         "fieldType": "camsg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<html>\n<body>\n   <table>\n     <tr>\n       <td></td>\n       <td></td>\n       <td></td>\n     </tr>\n   </table>\n</body>\n</html>",
+        "template": "<html>\n<body>\n   <table>\n     <tr>\n       <td>Name</td>\n       <td>{{payload.pname}}</td>\n       <td>Record</td>\n       <td>{{payload.prec}}</td>\n       <td>Age</td>\n       <td>{{payload.page}}</td>\n     </tr>\n   </table>\n</body>\n</html>",
         "output": "str",
-        "x": 422.5,
+        "x": 522.5,
         "y": 160,
         "wires": [
             [
@@ -190,7 +190,7 @@
         "SecurityType": "Credentials",
         "ReqTimeout": "25000",
         "name": "Upload to Storage",
-        "x": 662.5,
+        "x": 762.5,
         "y": 160,
         "wires": [
             [
@@ -245,7 +245,7 @@
         "name": "PDF Generation",
         "noerr": 0,
         "query": "// Available objects in the context: msg, vars, env\n// Logging: node.log|info|warn|debug|error(\"message\")\n// Errors:  throw new Error('message') \nnode.info('Inside PDF generation function')\nconst data = {\n  };\n\nconst pdf = require(\"html-pdf-lambda\");\npdf\n  .create(msg.payload, data)\n  .then((res) => {\n    console.log(res);\n    msg.payload = res;\n    node.send(msg)\n  })",
-        "x": 502.5,
+        "x": 602.5,
         "y": 160,
         "wires": [
             [
@@ -273,7 +273,7 @@
         "y": 160,
         "wires": [
             [
-                "f04e0240.077b7"
+                "95105947.c3d7d8"
             ]
         ],
         "caname": "datadog",
@@ -293,7 +293,7 @@
         "keyType": "",
         "property": "$string( {\"type\":\"log\", \"message\" : \"PDF generation completed\", \"data\": \"\",\"btxnid\": msg.bid, \"txnid\" : msg._msgid } )",
         "propertyType": "",
-        "x": 582.5,
+        "x": 682.5,
         "y": 160,
         "wires": [
             [
@@ -317,7 +317,7 @@
         "keyType": "",
         "property": "$string( {\"type\":\"service-out\", \"message\" : \"PDF upload completed\", \"data\": \"\",\"btxnid\": msg.bid, \"txnid\" : msg._msgid } )",
         "propertyType": "",
-        "x": 762.5,
+        "x": 862.5,
         "y": 160,
         "wires": [
             [
@@ -425,6 +425,27 @@
                 "pt": "camsg",
                 "to": "$eval( msg.payload.Records[0] ).bid",
                 "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "patient_name",
+                "pt": "camsg",
+                "to": "$eval( msg.payload.Records[0] ).patient_name",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "patient_recno",
+                "pt": "camsg",
+                "to": "$eval( msg.payload.Records[0] ).patient_recno",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "patient_age",
+                "pt": "camsg",
+                "to": "$eval( msg.payload.Records[0] ).patient_age",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -459,7 +480,7 @@
         "Region": "ap-southeast-2",
         "SecurityType": "Credentials",
         "ReqTimeout": "30000",
-        "x": 842.5,
+        "x": 942.5,
         "y": 160,
         "wires": [
             [
@@ -468,5 +489,22 @@
         ],
         "caname": "sns",
         "category": "aws"
+    },
+    {
+        "id": "95105947.c3d7d8",
+        "type": "Datamapper",
+        "z": "main.flow",
+        "name": "Datamapper",
+        "datamappertype": "{\n \"pname\": msg.patient_name,\n \"prec\": patient_recno,\n \"page\": patient_age\n}",
+        "testdataeditortype": "{\n    \"payload\": \"hello world\"\n}",
+        "x": 422.5,
+        "y": 160,
+        "wires": [
+            [
+                "f04e0240.077b7"
+            ]
+        ],
+        "caname": "datamapper",
+        "category": "transformation"
     }
 ]
